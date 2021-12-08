@@ -1,7 +1,3 @@
-#- name: test
-#  debug:
-#    msg: {{ hostvars[ipv4][adress] }}
-
 - name: Creates directory
   file:
     path: "{{ rke_config_dir }}"
@@ -14,8 +10,8 @@
     mode: u=rw,g=r,o=
   register: rke_cluster_config
 
-#- name: Run RKE
-#  shell: rke up --config ./rancher-cluster.yml
-#  args:
-#    chdir: "{{ rke_config_dir }}"
- #when: rke_binary is changed or rke_cluster_config is changed or rke_force_configure
+- name: Run RKE
+  shell: rke up --config ./rancher-cluster.yml
+  args:
+    chdir: "{{ rke_config_dir }}"
+ when: rke_binary is changed or rke_cluster_config is changed or rke_force_configure
