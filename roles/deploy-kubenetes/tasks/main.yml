@@ -1,3 +1,10 @@
+- name: Create rke user
+  user:
+    name: "{{ rke_ssh_user }}"
+    uid: 10010
+    shell: /sbin/noligin
+    goup: nobody
+
 - name: Creates directory
   file:
     path: "{{ rke_config_dir }}"
@@ -12,6 +19,6 @@
 
 - name: Run RKE
   shell: rke up --config ./rancher-cluster.yml
+  remote_user: rke_ssh_user
   args:
     chdir: "{{ rke_config_dir }}"
- when: rke_binary is changed or rke_cluster_config is changed or rke_force_configure
