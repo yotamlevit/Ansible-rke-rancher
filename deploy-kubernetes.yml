@@ -1,7 +1,7 @@
 ---
 
 - hosts: rke
-  remote_user: vagrant
+  remote_user: root
   become: yes
   roles:
     - install-rke
