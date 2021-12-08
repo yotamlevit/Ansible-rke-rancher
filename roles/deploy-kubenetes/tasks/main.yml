@@ -1,0 +1,17 @@
+- name: Creates directory
+  file:
+    path: "{{ rke_config_dir }}"
+    state: directory
+
+- name: Create/update RKE config file
+  template:
+    src: rke_cluster.yml.j2
+    dest: "{{ rke_config_dir }}/rke_cluster.yml"
+    mode: u=rw,g=r,o=
+  register: rke_cluster_config
+
+- name: Run RKE
+  shell: rke up --config ./rancher-cluster.yml
+  args:
+    chdir: "{{ rke_config_dir }}"
+ when: rke_binary is changed or rke_cluster_config is changed or rke_force_configure
