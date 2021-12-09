@@ -1,0 +1,9 @@
+- name: kubectl | Install
+  blocke:
+    - name: Install kubectl from YUM repo
+        yum:
+          name: kubectl
+          state: present
+  rescue:
+    - name: Install kubectl from local
+        shell: install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
