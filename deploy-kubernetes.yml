@@ -4,5 +4,6 @@
   remote_user: root
   become: yes
   roles:
+    - install-kubectl
     - install-rke
     - deploy-kubenetes
