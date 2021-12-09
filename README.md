@@ -1,2 +1,2 @@
 # Ansible-rke-rancher
-Ansible deployment for rke &amp; rancher
+Air Gapped-ish Ansible deployment for rke &amp; rancher
