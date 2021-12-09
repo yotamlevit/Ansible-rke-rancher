@@ -9,11 +9,11 @@
           owner: "root"
           group: "root"
           mode: 0755
-    rescue:
-      - name: Install from local installation
-          copy:
-            src: rke_linux-amd64
-            dest: "{{ rke_install_dir }}/rke_{{ rke_version }}"
+  rescue:
+    - name: Install from local installation
+        copy:
+          src: rke_linux-amd64
+          dest: "{{ rke_install_dir }}/rke_{{ rke_version }}"
 
 - name: RKE | Create a symlink to the binary
   file:
