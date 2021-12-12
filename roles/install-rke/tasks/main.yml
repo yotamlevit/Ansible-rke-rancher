@@ -1,19 +1,24 @@
----
-
+- name: Determine if rke is installed
+  command: which rke
+  register: rke_installed
+  ignore_errors: true
+  changed_when: false
+  
 - name: RKE | Install
-  blocke:
+  block:
     - name: Download binary from Github
-        get_url:
-          url: "{{ rke_binary_url }}"
-          dest: "{{ rke_install_dir }}/rke_{{ rke_version }}"
-          owner: "root"
-          group: "root"
-          mode: 0755
+      get_url:
+        url: "{{ rke_binary_url }}"
+        dest: "{{ rke_install_dir }}/rke_{{ rke_version }}"
+        owner: "root"
+        group: "root"
+        mode: 0755
   rescue:
     - name: Install from local installation
-        copy:
-          src: rke_linux-amd64
-          dest: "{{ rke_install_dir }}/rke_{{ rke_version }}"
+      copy:
+        src: rke_linux-amd64
+        dest: "{{ rke_install_dir }}/rke"
+  when: rke_installed['failed']
 
 - name: RKE | Create a symlink to the binary
   file:
