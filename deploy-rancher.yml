@@ -1,0 +1,7 @@
+---
+
+- hosts: rancher
+  remote_user: root
+  become: yes
+  roles:
+    - deploy-kubenetes
