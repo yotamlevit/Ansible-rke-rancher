@@ -1,2 +1,2 @@
 [rke]
-192.168.146.128 rke_node_role=['controlplane', 'etcd', 'worker']
+192.168.146.128 rke_node_role='["controlplane", "etcd", "worker"]'
