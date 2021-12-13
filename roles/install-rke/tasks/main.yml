@@ -3,7 +3,7 @@
   register: rke_installed
   ignore_errors: true
   changed_when: false
-  
+
 - name: RKE | Install
   block:
     - name: Download binary from Github
@@ -18,10 +18,5 @@
       copy:
         src: rke_linux-amd64
         dest: "{{ rke_install_dir }}/rke"
+        mode: 0700
   when: rke_installed['failed']
-
-- name: RKE | Create a symlink to the binary
-  file:
-    src: "{{ rke_install_dir }}"
-    dest: "{{ rke_install_dir }}/rke"
-    state: link
