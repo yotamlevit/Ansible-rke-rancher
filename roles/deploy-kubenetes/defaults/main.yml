@@ -8,7 +8,7 @@ rke_config_dir: "/opt/rke/"
 # By default, use the first host in the play
 rke_controller_hostname: "{{ ansible_play_hosts[0] }}"
 
-rke_ssh_user: rke_user
+rke_ssh_user: rancher
 
 
 # Private registry 
