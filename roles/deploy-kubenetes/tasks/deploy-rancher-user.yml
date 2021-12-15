@@ -1,0 +1,11 @@
+- name: Determine if user 10010 exists
+  command: id -nu 10010
+  register: user_10010
+  ignore_errors: yes
+
+- name: Create rke user
+  user:
+    name: "{{ rke_ssh_user }}"
+    uid: 10010
+    group: nobody
+  when: not user_10010.stdout | d("")
