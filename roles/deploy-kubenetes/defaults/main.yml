@@ -9,6 +9,7 @@ rke_config_dir: "/opt/rke/"
 rke_controller_hostname: "{{ ansible_play_hosts[0] }}"
 
 rke_ssh_user: rancher
+rke_ssh_user_password: Password1
 
 
 # Private registry 

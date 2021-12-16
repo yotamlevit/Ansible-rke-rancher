@@ -6,6 +6,7 @@
 - name: Create rke user
   user:
     name: "{{ rke_ssh_user }}"
+    password: "{{ rke_ssh_user_password }}"
     uid: 10010
-    group: nobody
+    group: docker
   when: not user_10010.stdout | d("")
