@@ -6,4 +6,3 @@
   roles:
     - install-kubectl
     - install-rke
-    - deploy-kubenetes
