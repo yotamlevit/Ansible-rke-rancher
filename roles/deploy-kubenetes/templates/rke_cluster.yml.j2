@@ -4,9 +4,9 @@ cluster_name: "{{ cluster_name }}"
 
 nodes:
 {% for host in ansible_play_hosts %}
-  - address: "{{ [inventory_hostname] }}"
+  - address: "{{ inventory_hostname }}"
     user: {{ rke_ssh_user }}
-    ssh_key_path: /home/user/.ssh/id_rsa
+    ssh_key_path: /home/{{ rke_ssh_user }}/.ssh/id_rsa
     role:
       {{ hostvars[host].rke_node_role }}
 {% endfor %}
