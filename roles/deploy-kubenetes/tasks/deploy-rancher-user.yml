@@ -3,10 +3,31 @@
   register: user_10010
   ignore_errors: yes
 
-- name: Create rke user
+- name: Create rke user and SSH key
   user:
     name: "{{ rke_ssh_user }}"
-    password: "{{ rke_ssh_user_password }}"
+    password: "{{ Password1 | password_hash('sha512') }}"
     uid: 10010
     group: docker
+    generate_ssh_key: yes
+    ssh_key_comment: "{{ rke_ssh_user }}@localhost.localdomain"
   when: not user_10010.stdout | d("")
+
+#- name: Rancher user | SSH-KeyGen
+#  remote_user: "{{ rke_ssh_user }}"
+#  shell: "ssh-keygen"
+#  
+#- name: Fetch the keyfile from one server to another
+#  fetch: 
+#    src: "/home/{{ rke_ssh_user }}/.ssh/id_rsa.pub"
+#    dest: "/tmp/rancher_ssh_keys/{{ansible_hostname}}-id_rsa"
+#    flat: yes
+#
+#- name : Synchronize SSH keys between hosts
+#  authorized_key:
+#    user: root
+#    state: present
+#    key: "{{ lookup('file', '/tmp/rancher_ssh_keys/{{item}}-id_rsa') }}"
+#  #when: "{{ item != ansible_hostname }}"
+#  with_items:#
+#    - "{{ groups['rke'] #}}"
